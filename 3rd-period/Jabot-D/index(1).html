@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!Project by Francis Constantino and Jabot Dixon>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+      
+        body {
+            text-align: center;
+            background: gray;
+            font-family: 'Impact', sans-serif;
+        } /* change ui of calculator */
+        .calculator  {
+            background: lightgray;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+        } /* calculator style */
+        .inputs {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            width: 200px;
+            font-family: 'Impact', sans-serif;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 18px;
+            transition: background 0.3s, color 0.3s;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Impact', sans-serif;
+        } /* button functionality */
+        button:hover {
+            background: black;
+            color: white;
+        } /* while hovering over button, appearance will change */
+        #result-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+            border-radius: 5px;
+            width: 250px;
+            font-size: 18px;
+            font-family: 'Impact', sans-serif;
+            display: none; /* hidden by default, shown when answer is given */
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculator</h1>
+        <input type="number" class="inputs" id="inp1" placeholder="Enter first number">
+        <input type="number" class="inputs" id="inp2" placeholder="Enter second number">
+        <br>
+        <button onclick="calculate('add')">+</button>
+        <button onclick="calculate('subtract')">-</button>
+        <button onclick="calculate('multiply')">*</button>
+        <button onclick="calculate('divide')">÷</button>
+        <button onclick="calculate('modulus')">%</button>
+
+        
+        <div id="result-box">Your Answer is: <span id="result-text"></span></div>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            let num1 = Number(document.getElementById("inp1").value);
+            let num2 = Number(document.getElementById("inp2").value);
+            let result;
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Please enter valid numbers!");
+                return;
+            }
+
+            switch (operation) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    break;
+                case 'divide':
+                    if (num2 === 0) {
+                        alert("Cannot divide by zero!");
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                case 'modulus':
+                    if (num2 === 0) {
+                        alert("Cannot divide by zero!");
+                        return;
+                    }
+                    result = num1 % num2;
+                    break;
+                default:
+                    alert("Invalid operation!");
+                    return;
+                /* it is mathematically impossible to divide by zero, function implemented here */
+            }
+
+            // display the result inside the result box
+            document.getElementById("result-text").textContent = result;
+            document.getElementById("result-box").style.display = "block"; // show the result box
+        }
+    </script>
+</body>
+</html>
